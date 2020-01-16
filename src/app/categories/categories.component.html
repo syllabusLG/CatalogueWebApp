@@ -1,0 +1,5 @@
+<ul class="list-group" *ngIf="categories">
+  <li *ngFor="let c of categories._embedded.categories" class="list-group-item">
+    {{c.name}}
+  </li>
+</ul>
