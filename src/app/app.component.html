@@ -5,19 +5,20 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown">
+      <li class="dropdown" *ngIf="isAuthenticated()">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Gestion des produits</a></li>
-          <li><a href="#">Gestion des categories</a></li>
-          <li><a href="#">Gestion des utilisateurs</a></li>
+          <li *ngIf="isUser()"><a href="#">Gestion des produits</a></li>
+          <li *ngIf="isAdmin()"><a href="#">Gestion des categories</a></li>
+          <li *ngIf="isAdmin()"><a href="#">Gestion des utilisateurs</a></li>
         </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li>
-        <a routerLink="/login">Login</a>
+        <a *ngIf="!isAuthenticated()" routerLink="/login">Login</a>
+        <a *ngIf="isAuthenticated()" (click)="logOut()" class="btn">Logout</a>
       </li>
     </ul>
   </div>
