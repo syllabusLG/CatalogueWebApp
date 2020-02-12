@@ -19,17 +19,17 @@ export class CatalogueService {
   }
 
   public deleteRessource(url){
-    let headers=new HttpHeaders({'authorization':'Bearer' +this.authService.jwt})
+    let headers=new HttpHeaders({'authorization':'Bearer '+this.authService.jwt})
     return this.http.delete(url, {headers:headers});
   }
 
   public addRessource(url, data){
-    let headers=new HttpHeaders({'authorization':'Bearer' +this.authService.jwt})
+    let headers=new HttpHeaders({'authorization':'Bearer '+this.authService.jwt})
     return this.http.post(url, data, {headers:headers});
   }
 
   public updateRessource(url, data){
-    let headers=new HttpHeaders({'authorization':'Bearer' +this.authService.jwt})
+    let headers=new HttpHeaders({'authorization':'Bearer '+this.authService.jwt})
     return this.http.patch(url, data, {headers:headers});
   }
 }

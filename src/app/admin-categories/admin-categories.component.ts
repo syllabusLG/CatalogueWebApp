@@ -17,7 +17,7 @@ export class AdminCategoriesComponent implements OnInit {
     this.loadCategories();
   }
 
-  loadCategories(){
+  public loadCategories(){
     this.catalogueService.getAllCategories()
       .subscribe(data=>{
         this.categories = data;
@@ -25,7 +25,7 @@ export class AdminCategoriesComponent implements OnInit {
         console.log(error);
       })
   }
-  onDeleteCategorie(category) {
+  public onDeleteCategorie(category) {
     let c = confirm("Etes vous sûre?");
     if (!c) return;
     this.catalogueService.deleteRessource(category._links.self.href)
@@ -37,11 +37,11 @@ export class AdminCategoriesComponent implements OnInit {
       })
   }
 
-  onNewCat() {
+  public onNewCat() {
     this.mode = 'new-cat';
   }
 
-  onSaveCat(data) {
+  public onSaveCat(data) {
     let url = this.catalogueService.host+'/categories';
     this.catalogueService.addRessource(url, data)
       .subscribe(data =>{
@@ -52,7 +52,7 @@ export class AdminCategoriesComponent implements OnInit {
       })
   }
 
-  onEditCategorie(cat) {
+  public onEditCategorie(cat) {
     this.catalogueService.getRessource(cat._links.self.href)
       .subscribe(data =>{
         this.currentCategorie = data;
@@ -62,7 +62,7 @@ export class AdminCategoriesComponent implements OnInit {
       })
   }
 
-  onUpdateCat(data) {
+  public onUpdateCat(data) {
     let url = this.currentCategorie._links.self.href;
     this.catalogueService.updateRessource(url, data)
       .subscribe(data => {
