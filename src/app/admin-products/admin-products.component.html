@@ -1,1 +1,65 @@
-<p>admin-products works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">Gestion des produits</div>
+  <div class="panel-body">
+    <div>
+      <button class="btn btn-success" (click)="onNewProd()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <p></p>
+    <div *ngIf="mode=='new-prod'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onSaveProd(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Price</label>
+          <input type="number" name="price" ngModel class="form-control">
+        </div>
+        <div class="form-group">
+          <select formControlName="category">
+            <option value="">---</option>
+            <option *ngFor="let c of categories._embedded.categories">{{c}}</option>
+          </select>
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='edit-prod'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onUpdateProd(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control" [(ngModel)]="currentProduit.name">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control" [(ngModel)]="currentProduit.name">
+        </div>
+        <button class="btn btn-success" type="submit">Update</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='list'">
+      <table class="table table-striped" *ngIf="products">
+        <tr>
+          <th>Name</th><th>Price</th><th>Category</th>
+        </tr>
+        <tr *ngFor="let p of products._embedded.products">
+          <td>{{p.name}}</td>
+          <td>{{p.price | number:'0.3'}}</td>
+          <td>{{p.category}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteProduct(p)">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onEditProduct(p)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

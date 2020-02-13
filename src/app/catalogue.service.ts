@@ -14,6 +14,10 @@ export class CatalogueService {
     return this.http.get(this.host+"/categories");
   }
 
+  public getAllProducts(){
+    return this.http.get(this.host+"/products")
+  }
+
   public getRessource(url){
     return this.http.get(url);
   }
